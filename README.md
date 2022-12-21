@@ -7,20 +7,14 @@
 <p align="left">How to add to your project:</p>
 <ul>
     <li>Add this to your composer.json file, inside the root object:
-        <pre>    "repositories": [
-        {
-            "type":"package",
-            "package": {
-              "name": "tcg/voyager",
-              "version":"mhk-master",
-              "source": {
-                  "url": "https://github.com/mauhk/voyager.git",
-                  "type": "git",
-                  "reference":"mhk-master"
+        <pre>
+            "repositories": [
+                {
+                    "url": "https://github.com/mauhk/voyager.git",
+                    "type": "git"
                 }
-            }
-        }
-    ],</pre>
+            ],
+        </pre>
     </li>
     <li>Add this to your composer.json file, inside "require" section:
         <pre>"tcg/voyager": "dev-mhk-master"</pre>
