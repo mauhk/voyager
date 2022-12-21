@@ -16,10 +16,7 @@
             ],
         </pre>
     </li>
-    <li>Add this to your composer.json file, inside "require" section:
-        <pre>"tcg/voyager": "dev-mhk-master"</pre>
-    </li>
-    <li>Run <code>composer update</code> and <code>composer install</code>
+    <li>Run <code>composer require tcg/voyager</code>
     </li>
     <li>Follow the other instructions from the main TCG Voyager project</li>
 </ul>
