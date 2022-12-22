@@ -2,6 +2,7 @@
 
 namespace TCG\Voyager\Http\Controllers;
 
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -13,6 +14,7 @@ use TCG\Voyager\Events\BreadAdded;
 use TCG\Voyager\Events\BreadDeleted;
 use TCG\Voyager\Events\BreadUpdated;
 use TCG\Voyager\Facades\Voyager;
+use TCG\Voyager\Libs\Orangehill\Iseed\Facades\Iseed;
 
 class VoyagerBreadController extends Controller
 {
@@ -170,11 +172,32 @@ class VoyagerBreadController extends Controller
 
             // Save translations if applied
             $dataType->saveTranslations($translations);
+            
+            $this->generateBreadSeed();
 
             return redirect()->route('voyager.bread.index')->with($data);
         } catch (Exception $e) {
             return back()->with($this->alertException($e, __('voyager::generic.update_failed')));
         }
+    }
+
+    public function generateBreadSeed(){
+        if (env('APP_ENV') != 'local') {
+            throw new Exception('cannot edit on production');
+        }
+
+        config(['iseed::config.stub_file' => 'iseed_truncate.stub']);
+        Iseed::generateSeed('data_rows');
+        Iseed::generateSeed('data_types');
+        Iseed::generateSeed('menus');
+        Iseed::generateSeed('menu_items');
+        Iseed::generateSeed('permissions');
+
+        config(['iseed::config.stub_file' => 'iseed_upsert.stub']);
+        Iseed::generateSeedUpsert('data_rows');
+        Iseed::generateSeedUpsert('roles');
+        Iseed::generateSeedUpsert('permission_role');
+        Iseed::generateSeedUpsert('settings', ['value']);
     }
 
     /**
