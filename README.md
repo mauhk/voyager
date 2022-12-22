@@ -18,5 +18,13 @@
     </li>
     <li>Run <code>composer require tcg/voyager</code>
     </li>
-    <li>Follow the other instructions from the main TCG Voyager project</li>
+    <li>Add this to your config/app.php
+        <pre>
+            /*
+             * Voyager
+             */
+            TCG\Voyager\VoyagerServiceProvider::class,
+            TCG\Voyager\Libs\Orangehill\Iseed\IseedServiceProvider::class
+        </pre>
+    </li>
 </ul>
