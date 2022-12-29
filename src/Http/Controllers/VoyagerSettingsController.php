@@ -109,6 +109,8 @@ class VoyagerSettingsController extends Controller
             $setting->save();
         }
 
+        (new VoyagerBreadController)->generateBreadSeed();
+
         request()->flashOnly('setting_tab');
 
         return back()->with([
