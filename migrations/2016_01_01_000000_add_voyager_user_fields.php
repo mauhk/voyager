@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Schema;
 
 class AddVoyagerUserFields extends Migration
 {
@@ -13,7 +14,7 @@ class AddVoyagerUserFields extends Migration
             if (!Schema::hasColumn('users', 'avatar')) {
                 $table->string('avatar')->nullable()->after('email')->default('users/default.png');
             }
-            $table->bigInteger('role_id')->nullable()->after('id');
+            $table->uuid('role_id')->after('id');
         });
     }
 
@@ -22,15 +23,6 @@ class AddVoyagerUserFields extends Migration
      */
     public function down()
     {
-        if (Schema::hasColumn('users', 'avatar')) {
-            Schema::table('users', function ($table) {
-                $table->dropColumn('avatar');
-            });
-        }
-        if (Schema::hasColumn('users', 'role_id')) {
-            Schema::table('users', function ($table) {
-                $table->dropColumn('role_id');
-            });
-        }
+        
     }
 }
