@@ -192,11 +192,11 @@ class VoyagerBreadController extends Controller
         Iseed::generateSeed('menus');
         Iseed::generateSeed('menu_items');
         Iseed::generateSeed('permissions');
+        Iseed::generateSeed('permission_role');
 
         config(['iseed::config.stub_file' => 'iseed_upsert.stub']);
         Iseed::generateSeedUpsert('data_rows');
         Iseed::generateSeedUpsert('roles');
-        Iseed::generateSeedUpsert('permission_role');
         Iseed::generateSeedUpsert('settings', ['value']);
     }
 
