@@ -183,7 +183,8 @@ class VoyagerBreadController extends Controller
 
     public function generateBreadSeed(){
         if (env('APP_ENV') != 'local') {
-            throw new Exception('cannot edit on production');
+            // cannot edit on production
+            return;
         }
 
         config(['iseed::config.stub_file' => 'iseed_truncate.stub']);
